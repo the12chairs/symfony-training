@@ -1,3 +1,7 @@
+{% extends 'EnsJobeetBundle::layout.html.twig' %}
+
+{% block content %}
+
 {% extends '::base.html.twig' %}
 
 {% block body -%}
@@ -13,4 +17,6 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+{% endblock %}
+
 {% endblock %}
