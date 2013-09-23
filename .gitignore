@@ -8,3 +8,4 @@
 /bin/
 /composer.phar
 /.idea/*
+/src/Ens/JobeetBundle/Entity/*~
