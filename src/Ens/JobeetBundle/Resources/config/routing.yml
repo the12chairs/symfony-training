@@ -3,5 +3,5 @@ EnsJobeetBundle_job:
     prefix: /job
  
 EnsJobeetBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: EnsJobeetBundle:Default:index }
+    pattern:  /
+    defaults: { _controller: EnsJobeetBundle:Job:index }
