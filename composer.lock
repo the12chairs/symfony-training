@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c96fd9de3f9a660769453e18df079d2a",
+    "hash": "0bb184b6ab37044b6e613f6cdf78b096",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1014,12 +1014,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "65fb44410157839a012e9a9b8c11d38598484a0e"
+                "reference": "c766d624e9993e1a743dcea0f887b068d8401ef5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/65fb44410157839a012e9a9b8c11d38598484a0e",
-                "reference": "65fb44410157839a012e9a9b8c11d38598484a0e",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c766d624e9993e1a743dcea0f887b068d8401ef5",
+                "reference": "c766d624e9993e1a743dcea0f887b068d8401ef5",
                 "shasum": ""
             },
             "require": {
@@ -1069,7 +1069,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2013-09-17 13:26:34"
+            "time": "2013-09-23 09:55:45"
         },
         {
             "name": "psr/log",
@@ -1162,12 +1162,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "aa21f258b341733a180d198208b6a90d9a82e217"
+                "reference": "403e13e384d8a81c9c8a1adfe89356e9849c14ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/aa21f258b341733a180d198208b6a90d9a82e217",
-                "reference": "aa21f258b341733a180d198208b6a90d9a82e217",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/403e13e384d8a81c9c8a1adfe89356e9849c14ff",
+                "reference": "403e13e384d8a81c9c8a1adfe89356e9849c14ff",
                 "shasum": ""
             },
             "require": {
@@ -1200,7 +1200,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2013-09-16 07:55:44"
+            "time": "2013-09-23 10:28:44"
         },
         {
             "name": "sensio/generator-bundle",
@@ -1528,12 +1528,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "714d7193837238a25535791d4c6149dc86e0ad93"
+                "reference": "c60a8e962b03b6476db70c962a839b98127b1743"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/714d7193837238a25535791d4c6149dc86e0ad93",
-                "reference": "714d7193837238a25535791d4c6149dc86e0ad93",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/c60a8e962b03b6476db70c962a839b98127b1743",
+                "reference": "c60a8e962b03b6476db70c962a839b98127b1743",
                 "shasum": ""
             },
             "require": {
@@ -1628,7 +1628,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-09-19 10:55:30"
+            "time": "2013-09-23 15:56:30"
         },
         {
             "name": "twig/extensions",
