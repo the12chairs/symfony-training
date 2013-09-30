@@ -9,7 +9,7 @@ use Ens\JobeetBundle\Entity\Category;
  */
 class CategoryController extends Controller
 {
-    public function showAction($slug)
+    public function showAction($slug, $page)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -19,10 +19,21 @@ class CategoryController extends Controller
             throw $this->createNotFoundException('Unable to find Category entity.');
         }
 
-        $category->setActiveJobs($em->getRepository('EnsJobeetBundle:Job')->getActiveJobs($category->getId()));
+        $totalJobs = $em->getRepository('EnsJobeetBundle:Job')->countActiveJobs($category->getId());
+        $jobsPerPage = $this->container->getParameter('max_jobs_on_category');
+        $lastPage = ceil($totalJobs / $jobsPerPage);
+        $previousPage = $page > 1 ? $page - 1 : 1;
+        $nextPage = $page < $lastPage ? $page + 1 : $lastPage;
+
+        $category->setActiveJobs($em->getRepository('EnsJobeetBundle:Job')->getActiveJobs($category->getId(), $jobsPerPage, ($page - 1) * $jobsPerPage));
 
         return $this->render('EnsJobeetBundle:Category:show.html.twig', array(
             'category' => $category,
+            'lastPage' => $lastPage,
+            'previousPage' => $previousPage,
+            'currentPage' => $page,
+            'nextPage' => $nextPage,
+            'totalJobs' => $totalJobs
         ));
     }
 }
