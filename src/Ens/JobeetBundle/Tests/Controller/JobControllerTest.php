@@ -73,27 +73,57 @@ class JobControllerTest extends WebTestCase
 
     public function testJobForm()
     {
+        //Submitting a Form
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/job/new');
         $this->assertEquals('Ens\JobeetBundle\Controller\JobController::newAction', $client->getRequest()->attributes->get('_controller'));
 
         $form = $crawler->selectButton('Preview your job')->form(array(
-            'job[company]'      => 'Sensio Labs',
-            'job[url]'          => 'http://www.sensio.com/',
-            'job[file]'         => __DIR__.'/../../../../../web/bundles/ensjobeet/images/sensio-labs.gif',
-            'job[position]'     => 'Developer',
-            'job[location]'     => 'Atlanta, USA',
-            'job[description]'  => 'You will work with symfony to develop websites for our customers.',
+            'job[company]' => 'Sensio Labs',
+            'job[url]' => 'http://www.sensio.com/',
+            'job[file]' => __DIR__ . '/../../../../../web/bundles/ensjobeet/images/sensio-labs.gif',
+            'job[position]' => 'Developer',
+            'job[location]' => 'Atlanta, USA',
+            'job[description]' => 'You will work with symfony to develop websites for our customers.',
             'job[how_to_apply]' => 'Send me an email',
-            'job[email]'        => 'for.a.job@example.com',
-            'job[is_public]'    => false,
+            'job[email]' => 'for.a.job@example.com',
+            'job[is_public]' => false,
         ));
 
         $client->submit($form);
         $this->assertEquals('Ens\JobeetBundle\Controller\JobController::createAction', $client->getRequest()->attributes->get('_controller'));
 
+        //Testing the Form
         $client->followRedirect();
         $this->assertEquals('Ens\JobeetBundle\Controller\JobController::previewAction', $client->getRequest()->attributes->get('_controller'));
+
+        //Testing the Database Record
+        $kernel = static::createKernel();
+        $kernel->boot();
+        $em = $kernel->getContainer()->get('doctrine.orm.entity_manager');
+
+        $query = $em->createQuery('SELECT count(j.id) from EnsJobeetBundle:Job j WHERE j.location = :location AND j.is_activated IS NULL AND j.is_public = 0');
+        $query->setParameter('location', 'Atlanta, USA');
+        $this->assertTrue(0 < $query->getSingleScalarResult());
+
+        //Testing for Errors
+        $crawler = $client->request('GET', '/job/new');
+        $form = $crawler->selectButton('Preview your job')->form(array(
+            'job[company]' => 'Sensio Labs',
+            'job[position]' => 'Developer',
+            'job[location]' => 'Atlanta, USA',
+            'job[email]' => 'not.an.email',
+        ));
+        $crawler = $client->submit($form);
+
+        // check if we have 3 errors
+        $this->assertEquals(3, $crawler->filter('.error_list')->count());
+        // check if we have error on job_description field
+        $this->assertTrue($crawler->filter('#job_description')->siblings()->first()->filter('.error_list')->count() == 1);
+        // check if we have error on job_how_to_apply field
+        $this->assertTrue($crawler->filter('#job_how_to_apply')->siblings()->first()->filter('.error_list')->count() == 1);
+        // check if we have error on job_email field
+        $this->assertTrue($crawler->filter('#job_email')->siblings()->first()->filter('.error_list')->count() == 1);
     }
 }
