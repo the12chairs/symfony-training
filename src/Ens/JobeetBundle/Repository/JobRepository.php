@@ -84,7 +84,8 @@ class JobRepository extends EntityRepository
         $query = $this->createQueryBuilder('j')
             ->delete()
             ->where('j.is_activated IS NULL')
-            ->andWhere('j.created_at < :created_at')     ->setParameter('created_at',  date('Y-m-d', time() - 86400 * $days))
+            ->andWhere('j.created_at < :created_at')
+            ->setParameter('created_at',  date('Y-m-d', time() - 86400 * $days))
             ->getQuery();
 
         return $query->execute();
