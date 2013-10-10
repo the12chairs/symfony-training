@@ -27,13 +27,16 @@ class CategoryController extends Controller
 
         $category->setActiveJobs($em->getRepository('EnsJobeetBundle:Job')->getActiveJobs($category->getId(), $jobsPerPage, ($page - 1) * $jobsPerPage));
 
-        return $this->render('EnsJobeetBundle:Category:show.html.twig', array(
+        $format = $this->getRequest()->getRequestFormat();
+
+        return $this->render('EnsJobeetBundle:Category:show.'.$format.'.twig', array(
             'category' => $category,
             'lastPage' => $lastPage,
             'previousPage' => $previousPage,
             'currentPage' => $page,
             'nextPage' => $nextPage,
-            'totalJobs' => $totalJobs
+            'totalJobs' => $totalJobs,
+            'feedId' => sha1($this->get('router')->generate('EnsJobeetBundle_category', array('slug' =>  $category->getSlug(), '_format' => 'atom'), true)),
         ));
     }
 }
