@@ -8,3 +8,5 @@
 /bin/
 /composer.phar
 /.idea/*
+/src/Ens/JobeetBundle/Entity/*~
+/web/uploads/jobs/*
