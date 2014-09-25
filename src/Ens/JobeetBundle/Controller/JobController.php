@@ -260,7 +260,8 @@ class JobController extends Controller
     /**
      * Creates a form to delete a Job entity by id.
      *
-     * @param mixed $id The entity id
+     * @param $token
+     * @internal param mixed $id The entity id
      *
      * @return \Symfony\Component\Form\Form The form
      */
