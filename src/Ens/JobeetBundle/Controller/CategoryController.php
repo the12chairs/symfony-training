@@ -20,22 +20,28 @@ class CategoryController extends Controller
         }
 
         $totalJobs = $em->getRepository('EnsJobeetBundle:Job')->countActiveJobs($category->getId());
-        $jobsPerPage = $this->container->getParameter('max_jobs_on_category');
-        $lastPage = ceil($totalJobs / $jobsPerPage);
-        $previousPage = $page > 1 ? $page - 1 : 1;
-        $nextPage = $page < $lastPage ? $page + 1 : $lastPage;
 
-        $category->setActiveJobs($em->getRepository('EnsJobeetBundle:Job')->getActiveJobs($category->getId(), $jobsPerPage, ($page - 1) * $jobsPerPage));
+
+        $category->setActiveJobs($em->getRepository('EnsJobeetBundle:Job')->getActiveJobs());
 
         $format = $this->getRequest()->getRequestFormat();
 
+
+        // Special pagination
+
+        $paginator = $this->get('knp_paginator');
+
+        $pagination = $paginator->paginate(
+            $em->getRepository('EnsJobeetBundle:Job')->getActiveJobs(),
+            $this->get('request')->query->get('page', $page),
+            10
+        );
+
         return $this->render('EnsJobeetBundle:Category:show.'.$format.'.twig', array(
             'category' => $category,
-            'lastPage' => $lastPage,
-            'previousPage' => $previousPage,
             'currentPage' => $page,
-            'nextPage' => $nextPage,
             'totalJobs' => $totalJobs,
+            'pagination' => $pagination,
             'feedId' => sha1($this->get('router')->generate('EnsJobeetBundle_category', array('slug' =>  $category->getSlug(), '_format' => 'atom'), true)),
         ));
     }

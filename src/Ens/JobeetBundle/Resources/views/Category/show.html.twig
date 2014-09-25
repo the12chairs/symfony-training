@@ -1,5 +1,9 @@
 {% extends 'EnsJobeetBundle::layout.html.twig' %}
- 
+
+
+
+
+
 {% block title %}
     Jobs in the {{ category.name }} category
 {% endblock %}
@@ -10,6 +14,7 @@
 {% endblock %}
  
 {% block content %}
+
     <div class="category">
         <div class="feed">
             <a href="{{ path('EnsJobeetBundle_category', { 'slug': category.slug, '_format': 'atom' }) }}">Feed</a>
@@ -17,41 +22,19 @@
         <h1>{{ category.name }}</h1>
     </div>
 
-    {% include 'EnsJobeetBundle:Job:list.html.twig' with {'jobs': category.activejobs} %}
 
-    {% if lastPage > 1 %}
-        <div class="pagination">
-            <a href="{{ path('EnsJobeetBundle_category', { 'slug': category.slug, 'page': 1 }) }}">
-                <img src="{{ asset('bundles/ensjobeet/images/first.png') }}" alt="First page" title="First page" />
-            </a>
-
-            <a href="{{ path('EnsJobeetBundle_category', { 'slug': category.slug, 'page': previousPage }) }}">
-                <img src="{{ asset('bundles/ensjobeet/images/previous.png') }}" alt="Previous page" title="Previous page" />
-            </a>
-
-            {% for page in 1..lastPage %}
-                {% if page == currentPage %}
-                    {{ page }}
-                {% else %}
-                    <a href="{{ path('EnsJobeetBundle_category', { 'slug': category.slug, 'page': page }) }}">{{ page }}</a>
-                {% endif %}
-            {% endfor %}
-
-            <a href="{{ path('EnsJobeetBundle_category', { 'slug': category.slug, 'page': nextPage }) }}">
-                <img src="{{ asset('bundles/ensjobeet/images/next.png') }}" alt="Next page" title="Next page" />
-            </a>
-
-            <a href="{{ path('EnsJobeetBundle_category', { 'slug': category.slug, 'page': lastPage }) }}">
-                <img src="{{ asset('bundles/ensjobeet/images/last.png') }}" alt="Last page" title="Last page" />
-            </a>
-        </div>
-    {% endif %}
-
-    <div class="pagination_desc">
-        <strong>{{ totalJobs }}</strong> jobs in this category
-
-        {% if lastPage > 1 %}
-            - page <strong>{{ currentPage }}/{{ lastPage }}</strong>
-        {% endif %}
+    <div class="navigation">
+        Total: {{ totalJobs }}
+        {{ knp_pagination_render(pagination) }}
     </div>
+
+    {% include 'EnsJobeetBundle:Job:list.html.twig' with {'jobs': pagination} %}
+
+    <div class="navigation">
+        Total: {{ totalJobs }}
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+
+
 {% endblock %}
