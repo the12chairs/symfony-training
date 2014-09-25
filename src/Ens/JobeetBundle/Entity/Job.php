@@ -5,6 +5,8 @@ namespace Ens\JobeetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Ens\JobeetBundle\Utils\Jobeet as Jobeet;
 
+
+
 /**
  * Job
  */
@@ -582,7 +584,7 @@ class Job
     }
 
     /**
-     * @ORM\postRemove
+     * @ORM\PostRemove
      */
     public function removeUpload()
     {

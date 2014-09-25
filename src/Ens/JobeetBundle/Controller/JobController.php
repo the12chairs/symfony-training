@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Ens\JobeetBundle\Entity\Job;
 use Ens\JobeetBundle\Form\JobType;
+use Doctrine\ORM\Mapping;
+
 
 /**
  * Job controller.
