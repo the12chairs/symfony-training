@@ -25,7 +25,7 @@ ens_job_create:
 
 ens_job_edit:
     pattern:  /{token}/edit
-    defaults: { _controller: "EnsJobeetBundle:Job:edit" }
+    defaults: { _controller: "EnsJobeetBundle:Job:edit", token: 1}
 
 ens_job_update:
     pattern:  /{token}/update

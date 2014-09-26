@@ -1,7 +1,5 @@
 {% extends 'EnsJobeetBundle::layout.html.twig' %}
- 
 {% form_theme edit_form _self %}
- 
 {% block form_errors %}
     {% spaceless %}
         {% if errors|length > 0 %}
@@ -13,12 +11,10 @@
         {% endif %}
     {% endspaceless %}
 {% endblock form_errors %}
- 
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/css/job.css') }}" type="text/css" media="all" />
 {% endblock %}
- 
 {% block content %}
     <h1>Job edit</h1>
     <form action="{{ path('ens_job_update', { 'token': entity.token }) }}" method="post" {{ form_enctype(edit_form) }}>
@@ -111,7 +107,6 @@
             </tr>
             </tbody>
         </table>
-
         {{ form_rest(edit_form) }}
     </form>
 {% endblock %}

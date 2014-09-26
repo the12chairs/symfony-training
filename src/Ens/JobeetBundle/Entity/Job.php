@@ -2,6 +2,8 @@
 
 namespace Ens\JobeetBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File;
 use Doctrine\ORM\Mapping as ORM;
 use Ens\JobeetBundle\Utils\Jobeet as Jobeet;
 
@@ -12,6 +14,8 @@ use Ens\JobeetBundle\Utils\Jobeet as Jobeet;
  */
 class Job
 {
+
+    private $temp;
     /**
      * @var integer
      */
@@ -97,7 +101,43 @@ class Job
      */
     private $category;
 
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
     public $file;
+
+
+
+
+
+    /**
+     * Sets file.
+     *
+     * @param $file
+     */
+    public function setFile($file = null)
+    {
+        $this->file = $file;
+        // check if we have an old image path
+        if (isset($this->logo)) {
+            // store the old name to delete after the update
+            $this->temp = $this->logo;
+            $this->logo = null;
+        } else {
+            $this->logo = 'initial';
+        }
+    }
+
+    /**
+     * Get file.
+     *
+     * @return $this->file
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
 
     /**
      * Get id
@@ -560,6 +600,7 @@ class Job
      */
     public function preUpload()
     {
+
         if (null !== $this->file) {
             // do whatever you want to generate a unique name
             $this->logo = uniqid() . '.' . $this->file->guessExtension();
@@ -571,14 +612,23 @@ class Job
      */
     public function upload()
     {
+
         if (null === $this->file) {
             return;
         }
+
 
         // if there is an error when moving the file, an exception will
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
         $this->file->move($this->getUploadRootDir(), $this->logo);
+
+        if (isset($this->temp)) {
+            // delete the old image
+            unlink($this->getUploadRootDir().'/'.$this->temp);
+            // clear the temp image path
+            $this->temp = null;
+        }
 
         unset($this->file);
     }

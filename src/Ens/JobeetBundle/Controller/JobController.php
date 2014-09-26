@@ -100,11 +100,11 @@ class JobController extends Controller
     {
         $entity = new Job();
         $entity->setType('full-time');
-        $form   = $this->createForm(new JobType(), $entity);
+        //$form   = $this->createForm(new JobType(), $entity);
 
         return $this->render('EnsJobeetBundle:Job:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form'   => $this->createCreateForm($entity)->createView(),
         ));
     }
 
@@ -160,11 +160,8 @@ class JobController extends Controller
             throw $this->createNotFoundException('Unable to find Job entity.');
         }
 
-        if ($entity->getIsActivated()) {
-            throw $this->createNotFoundException('Job is activated and cannot be edited.');
-        }
 
-        $editForm = $this->createForm(new JobType(), $entity);
+        $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($token);
 
         return $this->render('EnsJobeetBundle:Job:edit.html.twig', array(
@@ -187,6 +184,8 @@ class JobController extends Controller
             'action' => $this->generateUrl('ens_job_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
+
+
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
@@ -215,6 +214,7 @@ class JobController extends Controller
 
         if ($editForm->isValid()) {
             $em->persist($entity);
+            //$entity->upload();
             $em->flush();
 
             return $this->redirect($this->generateUrl('ens_job_preview', array(
