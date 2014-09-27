@@ -1,5 +1,12 @@
+# Thats only we need for making test in individual db. Don't forget --test key for doctrine commands!
+#
+#
+# php app/console doctrine:fixtures:load --fixtures=src/Ens/JobeetBundle/Tests/DataFixtures/ORM/ --env=test
+# to load test fixtures
+#
+
 imports:
-    - { resource: config_dev.yml }
+    - { resource: config.yml }
 
 framework:
     test: ~
@@ -14,3 +21,9 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+doctrine:
+     dbal:
+         host: localhost
+         dbname: testdb
+         user: root
+         password: 123456
