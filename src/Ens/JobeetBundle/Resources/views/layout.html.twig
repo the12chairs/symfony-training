@@ -7,11 +7,17 @@
         {% endblock %}
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    {% block stylesheets %}
+    {% stylesheets '@EnsJobeetBundle/Resources/public/css/main.css' filter='yui_css' %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    {#
+    {% block stylesheets filter='yui_css' %}
         <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/css/main.css') }}" type="text/css" media="all" />
     {% endblock %}
-    {% block javascripts %}
-    {% endblock %}
+    #}
+    {% javascripts '@EnsJobeetBundle/Resources/public/js/*' filter='yui_js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <link rel="shortcut icon" href="{{ asset('bundles/ensjobeet/images/favicon.ico') }}" />
     <link rel="alternate" type="application/atom+xml" title="Latest Jobs" href="{{ url('ens_job', {'_format': 'atom'}) }}" />
 </head>

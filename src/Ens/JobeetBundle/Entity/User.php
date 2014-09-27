@@ -6,24 +6,28 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * User
+ * @ORM\Entity
+ * @ORM\Table(name="user")
  */
 class User implements UserInterface
 {
     /**
-     * @var integer
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string
+     * @ORM\Column(type="string", length="255")
      */
-    private $username;
+    protected $username;
 
     /**
-     * @var string
+     * @ORM\Column(type="string", length="255")
      */
-    private $password;
+    protected $password;
+
 
 
     /**
