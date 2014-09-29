@@ -197,6 +197,14 @@ class JobController extends Controller
      */
     public function updateAction($token)
     {
+
+        $request = $this->getRequest();
+
+        if($request->get('_route') == 'EnsJobeetBundle_nonlocalized') {
+            return $this->redirect($this->generateUrl('ens_jobeet_homepage'));
+        }
+
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('EnsJobeetBundle:Job')->findOneByToken($token);

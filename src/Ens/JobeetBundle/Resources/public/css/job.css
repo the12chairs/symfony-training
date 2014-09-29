@@ -84,7 +84,7 @@
 
 .expires_soon
 {
-  color: red;
+  color: #ff0000;
 }
 
 #job_actions li form, #job_actions li #form

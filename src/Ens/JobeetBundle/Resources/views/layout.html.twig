@@ -7,14 +7,13 @@
         {% endblock %}
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    {% stylesheets '@EnsJobeetBundle/Resources/public/css/main.css' filter='yui_css' %}
+
+    {% stylesheets 'bundles/ensjobeet/css/*' filter='cssrewrite, yui_css' %}
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
     {% endstylesheets %}
-    {#
-    {% block stylesheets filter='yui_css' %}
-        <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/css/main.css') }}" type="text/css" media="all" />
-    {% endblock %}
-    #}
+
+
+
     {% javascripts '@EnsJobeetBundle/Resources/public/js/*' filter='yui_js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
@@ -83,6 +82,21 @@
 
     <div id="footer">
         <div class="content">
+
+            <form action="{{ path('EnsJobeetBundle_changeLanguage') }}" method="get">
+                <label>Language</label>
+                <select name="language" id="language">
+
+
+                    <option value="ru" {% if app.request.get('_locale') == 'ru' %}selected="selected"{% endif %}>Русский</option>
+                    <option value="en" {% if app.request.get('_locale') == 'en' %}selected="selected"{% endif %}>English</option>
+
+                </select>
+                <input type="submit" value="Ok">
+            </form>
+
+
+
           <span class="symfony">
             <img src="{{ asset('bundles/ensjobeet/images/jobeet-mini.png') }}" />
             powered by <a href="http://www.symfony.com/">
@@ -98,5 +112,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

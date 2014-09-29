@@ -199,7 +199,7 @@ class JobControllerTest extends WebTestCase
     public function createJob($values = array(), $publish = false)
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/job/new');
+        $crawler = $client->request('GET', '/ru/job/new');
         $form = $crawler->selectButton('Preview your job')->form(array_merge(array(
             'job[company]'      => 'Sensio Labs',
             'job[url]'          => 'http://www.sensio.com/',
