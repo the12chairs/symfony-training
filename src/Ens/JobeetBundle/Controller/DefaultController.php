@@ -32,7 +32,6 @@ class DefaultController extends Controller
         ));
     }
 
-
     public function changeLanguageAction()
     {
         $language = $this->getRequest()->get('language');

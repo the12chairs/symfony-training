@@ -24,14 +24,14 @@
 
 
     <div class="navigation">
-        Total: {{ totalJobs }}
+        {% trans %}Total: {% endtrans %}{{ totalJobs }}
         {{ knp_pagination_render(pagination) }}
     </div>
 
     {% include 'EnsJobeetBundle:Job:list.html.twig' with {'jobs': pagination} %}
 
     <div class="navigation">
-        Total: {{ totalJobs }}
+        {% trans %}Total: {% endtrans %}{{ totalJobs }}
         {{ knp_pagination_render(pagination) }}
     </div>
 

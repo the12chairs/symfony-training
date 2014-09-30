@@ -24,7 +24,7 @@
 {% endblock %}
  
 {% block content %}
-    <h1>Job creation</h1>
+    <h1>{% trans %} Job creation {% endtrans %}</h1>
     <form action="{{ path('ens_job_create') }}" method="post" {{ form_enctype(form) }}>
         {% include 'EnsJobeetBundle:Job:_params.html.twig' with {'form': form} %}
     </form>

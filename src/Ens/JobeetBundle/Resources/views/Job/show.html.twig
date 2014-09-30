@@ -1,7 +1,7 @@
 {% extends 'EnsJobeetBundle::layout.html.twig' %}
  
 {% block title %}
-    {{ entity.company }} is looking for a {{ entity.position }}
+    {{ entity.company }} {% trans %} is looking for a {% endtrans %} {{ entity.position }}
 {% endblock %}
  
 {% block stylesheets %}
