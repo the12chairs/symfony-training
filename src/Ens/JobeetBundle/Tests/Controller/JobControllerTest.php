@@ -51,7 +51,7 @@ class JobControllerTest extends WebTestCase
         //Submitting a Form
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/job/new');
+        $crawler = $client->request('GET', '/ru/job/new');
         $this->assertEquals('Ens\JobeetBundle\Controller\JobController::newAction', $client->getRequest()->attributes->get('_controller'));
 
         $form = $crawler->selectButton('Preview your job')->form(array(
@@ -83,7 +83,7 @@ class JobControllerTest extends WebTestCase
         $this->assertTrue(0 < $query->getSingleScalarResult());
 
         //Testing for Errors
-        $crawler = $client->request('GET', '/job/new');
+        $crawler = $client->request('GET', '/ru/job/new');
         $form = $crawler->selectButton('Preview your job')->form(array(
             'job[company]' => 'Sensio Labs',
             'job[position]' => 'Developer',
@@ -122,7 +122,7 @@ class JobControllerTest extends WebTestCase
     {
         $client = $this->createJob(array('job[position]' => 'FOO3'), true);
         $crawler = $client->getCrawler();
-        $crawler = $client->request('GET', sprintf('/job/%s/edit', $this->getJobByPosition('FOO3')->getToken()));
+        $crawler = $client->request('GET', sprintf('/ru/job/%s/edit', $this->getJobByPosition('FOO3')->getToken()));
         $this->assertTrue(404 === $client->getResponse()->getStatusCode());
     }
 
@@ -161,7 +161,7 @@ class JobControllerTest extends WebTestCase
         $job->setExpiresAt(new \DateTime());
         $em->flush();
         // Go to the preview page and extend the job
-        $crawler = $client->request('GET', sprintf('/job/%s/%s/%s/%s', $job->getCompanySlug(), $job->getLocationSlug(), $job->getToken(), $job->getPositionSlug()));
+        $crawler = $client->request('GET', sprintf('/ru/job/%s/%s/%s/%s', $job->getCompanySlug(), $job->getLocationSlug(), $job->getToken(), $job->getPositionSlug()));
         $crawler = $client->getCrawler();
         $form = $crawler->selectButton('Extend')->form();
         $client->submit($form);

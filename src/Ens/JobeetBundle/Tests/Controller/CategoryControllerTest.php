@@ -15,6 +15,7 @@ class CategoryControllerTest extends WebTestCase
 
         // categories on homepage are clickable
         $crawler = $client->request('GET', '/');
+
         $link = $crawler->selectLink('Programming')->link();
         $client->click($link);
         $this->assertEquals('Ens\JobeetBundle\Controller\CategoryController::showAction', $client->getRequest()->attributes->get('_controller'));

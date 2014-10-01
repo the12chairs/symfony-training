@@ -1,5 +1,6 @@
 <?php
 
+// Now we can use migrations! Yay!
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
