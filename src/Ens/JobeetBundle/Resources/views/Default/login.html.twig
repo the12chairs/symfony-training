@@ -4,10 +4,10 @@
 
 <form action="{{
 path('login_check') }}" method="post">
-    <label for="username">Username:</label>
+    <label for="username">{% trans %}Username:{% endtrans %}</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
-    <label for="password">Password:</label>
+    <label for="password">{% trans %}Password:{% endtrans %}</label>
     <input type="password" id="password" name="_password" />
 
     <button type="submit">login</button>

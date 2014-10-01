@@ -83,19 +83,10 @@
     <div id="footer">
         <div class="content">
 
-            <form action="{{ path('EnsJobeetBundle_changeLanguage') }}" method="get">
-                <label>{% trans %} Language {% endtrans %}</label>
-                <select name="language" id="language">
-
-
-                    <option value="ru" {% if app.request.get('_locale') == 'ru' %}selected="selected"{% endif %}>Русский</option>
-                    <option value="en" {% if app.request.get('_locale') == 'en' %}selected="selected"{% endif %}>English</option>
-
-                </select>
-                <input type="submit" value="Ok">
-            </form>
-
-
+            <ul class="lang-menu">
+                <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ru'})) }}">Russian</a></li>
+                <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">English</a></li>
+            </ul>
 
           <span class="symfony">
             <img src="{{ asset('bundles/ensjobeet/images/jobeet-mini.png') }}" />

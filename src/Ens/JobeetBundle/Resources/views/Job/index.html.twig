@@ -19,8 +19,8 @@
 
                 {% if category.morejobs %}
                     <div class="more_jobs">
-                        and <a href="{{ path('EnsJobeetBundle_category', { 'slug': category.slug }) }}">{{ category.morejobs }}</a>
-                        more...
+                        {% trans %}and{% endtrans %} <a href="{{ path('EnsJobeetBundle_category', { 'slug': category.slug }) }}">{{ category.morejobs }}</a>
+                        {% trans %}more{% endtrans %}...
                     </div>
                 {% endif %}
             </div>

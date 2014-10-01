@@ -35,17 +35,17 @@
             {{ entity.description|nl2br }}
         </div>
 
-        <h4>How to apply?</h4>
+        <h4>{% trans %}How to apply?{% endtrans %}</h4>
 
         <p class="how_to_apply">{{ entity.howtoapply }}</p>
 
         <div class="meta">
-            <small>posted on {{ entity.createdat|date('m/d/Y') }}</small>
+            <small>{% trans %}posted on{% endtrans %} {{ entity.createdat|date('m/d/Y') }}</small>
         </div>
 
         <div style="padding: 20px 0">
             <a href="{{ path('ens_job_edit', { 'token': entity.token }) }}">
-                Edit
+                {% trans %}Edit{% endtrans %}
             </a>
         </div>
     </div>

@@ -71,8 +71,8 @@
                 <target>Как применить?</target>
             </trans-unit>
             <trans-unit id="18">
-                <source>posted on %date%</source>
-                <target>создано %date%</target>
+                <source>posted on</source>
+                <target>создано</target>
             </trans-unit>
             <trans-unit id="19">
                 <source>{0} No job in this category|{1} One job in this category|]1,Inf] %count% jobs in this category</source>
@@ -83,14 +83,12 @@
                 <target>Вакансии в категории %category%</target>
             </trans-unit>
             <trans-unit id="21">
-                <source>Your affiliate account has been created</source>
-                <target>Поздравляем! Ваш партнерский аккаунт успешно создан.</target>
+                <source>and</source>
+                <target>и</target>
             </trans-unit>
             <trans-unit id="22">
-                <source>Thank you!
-            You will receive an email with your affiliate token
-            as soon as your account will be activated.</source>
-                <target>Спасибо! Вы получите письмо с Вашим партнерским ключем, как только Ваш аккаунт будет активирован администратором.</target>
+                <source>more</source>
+                <target>также</target>
             </trans-unit>
             <trans-unit id="23">
                 <source>Expires in %count% days</source>
@@ -131,6 +129,18 @@
             <trans-unit id="32">
                 <source>Total:</source>
                 <target>Всего:</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>Username:</source>
+                <target>Имя:</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>Password:</source>
+                <target>Пароль:</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>How to apply?</source>
+                <target>Как откликнуться?</target>
             </trans-unit>
         </body>
     </file>
