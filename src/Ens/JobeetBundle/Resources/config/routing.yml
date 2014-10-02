@@ -35,19 +35,24 @@ EnsJobeetBundle_changeLanguage:
 
 
 # FOS/REST
-acme_demo_user_all:
-    pattern:  /api/jobs
+job_all:
+    pattern:  /api/job
     defaults: { _controller: EnsJobeetBundle:Job:all, _format: ~ }
     requirements:
         _method: GET
 
-acme_demo_user_get:
-    pattern:  /users/{id}
-    defaults: { _controller: AcmeDemoBundle:User:get, _format: ~ }
+job_get:
+    pattern:  /api/job/{id}
+    defaults: { _controller: EnsJobeetBundle:Job:one, _format: ~ }
     requirements:
         _method: GET
         id: "\d+"
 
+job_make:
+    pattern: /api/job/create
+    defaults: { _controller: EnsJobeetBundle:Job:make, _format: ~}
+    requirements:
+        _method: POST
 
 # No FOS/REST
 EnsJobeetBundle_api:

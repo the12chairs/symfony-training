@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
+
 /*
  * FOS/REST solution
  */
@@ -21,6 +22,39 @@ use FOS\RestBundle\View\View;
  */
 class JobController extends Controller
 {
+
+
+    /*
+     * Create Job via REST interface
+     * Might is there better solution
+     */
+    public function makeAction()
+    {
+
+        $entity  = new Job();
+        $form = $this->createForm(new JobType(), $entity);
+        $content = $this->get("request")->getContent();
+        $request = json_decode($content, true);
+        $form->submit($request);
+
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($entity);
+            $em->flush($entity);
+
+            $job = $form->getData();
+
+            return $job;
+        }
+
+        return $this->render('EnsJobeetBundle:Job:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView()
+        ));
+
+    }
 
 
     /**
@@ -41,7 +75,23 @@ class JobController extends Controller
 
     }
 
+    /**
+     * @Rest\View
+     */
+    public function oneAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
 
+        $rep = $em->getRepository('EnsJobeetBundle:Job');
+        $jobs = $rep->getActiveJob($id);
+
+        $view = View::create();
+        $view->setData($jobs);
+
+
+        return $view;
+
+    }
 
 
     /**
