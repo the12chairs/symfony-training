@@ -36,7 +36,11 @@
         "sonata-project/doctrine-extensions": "1.0.1",
         "knplabs/gaufrette": "dev-master",
         "sonata-project/block-bundle": "2.2.9",
-        "sonata-project/doctrine-orm-admin-bundle": "2.2.6"
+        "sonata-project/doctrine-orm-admin-bundle": "2.2.6",
+        "jms/serializer-bundle": "dev-master",
+        "friendsofsymfony/rest-bundle": "dev-master"
+
+
     },
     "scripts": {
         "post-install-cmd": [

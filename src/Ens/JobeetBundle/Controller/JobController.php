@@ -9,6 +9,11 @@ use Ens\JobeetBundle\Entity\Job;
 use Ens\JobeetBundle\Form\JobType;
 use Doctrine\ORM\Mapping;
 
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\View\View;
+/*
+ * FOS/REST solution
+ */
 
 /**
  * Job controller.
@@ -16,6 +21,28 @@ use Doctrine\ORM\Mapping;
  */
 class JobController extends Controller
 {
+
+
+    /**
+     * @Rest\View
+     */
+    public function allAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $rep = $em->getRepository('EnsJobeetBundle:Job');
+        $jobs = $rep->getActiveJobs();
+
+        $view = View::create();
+        $view->setData($jobs);
+
+
+        return $view;
+
+    }
+
+
+
 
     /**
      * Lists all Job entities.

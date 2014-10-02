@@ -9,6 +9,8 @@ use Ens\JobeetBundle\Utils\Jobeet as Jobeet;
 
 
 
+
+
 /**
  * Job
  */
@@ -680,5 +682,22 @@ class Job
 
         return true;
     }
+
+    public function asArray($host)
+    {
+        return array(
+            'category'     => $this->getCategory()->getName(),
+            'type'         => $this->getType(),
+            'company'      => $this->getCompany(),
+            'logo'         => $this->getLogo() ? 'http://' . $host . '/uploads/jobs/' . $this->getLogo() : null,
+            'url'          => $this->getUrl(),
+            'position'     => $this->getPosition(),
+            'location'     => $this->getLocation(),
+            'description'  => $this->getDescription(),
+            'how_to_apply' => $this->getHowToApply(),
+            'expires_at'   => $this->getCreatedAt()->format('Y-m-d H:i:s'),
+        );
+    }
+
 
 }

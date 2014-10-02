@@ -1,5 +1,6 @@
 Ens\JobeetBundle\Entity\Affiliate:
   type: entity
+  repositoryClass: Ens\JobeetBundle\Repository\AffiliateRepository
   table: affiliate
   id:
     id:
@@ -23,4 +24,4 @@ Ens\JobeetBundle\Entity\Affiliate:
       targetEntity: CategoryAffiliate
       mappedBy: affiliate
   lifecycleCallbacks:
-    prePersist: [ setCreatedAtValue ]
+    prePersist: [ setCreatedAtValue, setTokenValue]

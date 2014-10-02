@@ -32,3 +32,32 @@ EnsJobeetBundle_nonlocalized:
 EnsJobeetBundle_changeLanguage:
     pattern: /change_language
     defaults: { _controller: "EnsJobeetBundle:Default:changeLanguage" }
+
+
+# FOS/REST
+acme_demo_user_all:
+    pattern:  /api/jobs
+    defaults: { _controller: EnsJobeetBundle:Job:all, _format: ~ }
+    requirements:
+        _method: GET
+
+acme_demo_user_get:
+    pattern:  /users/{id}
+    defaults: { _controller: AcmeDemoBundle:User:get, _format: ~ }
+    requirements:
+        _method: GET
+        id: "\d+"
+
+
+# No FOS/REST
+EnsJobeetBundle_api:
+    pattern: /api/{token}/jobs.{_format}
+    defaults: {_controller: "EnsJobeetBundle:Api:list"}
+    requirements:
+        format: json|yaml
+
+EnsJobeetBundle_api_show:
+    pattern: /api/{token}/{id}/show.{_format}
+    defaults: {_controller: "EnsJobeetBundle:Api:show"}
+    requirements:
+        format: json|yaml

@@ -99,3 +99,15 @@ assetic:
         yui_js:
             jar: "%kernel.root_dir%/Resources/java/yuicompressor.jar"
         cssrewrite: ~
+
+sensio_framework_extra:
+    view:
+        annotations: false
+
+fos_rest:
+    view:
+        view_response_listener: true
+    format_listener:
+        rules:
+            - { path: ^/, priorities: [html, json, xml, css], fallback_format: html, prefer_extension: false }
+
