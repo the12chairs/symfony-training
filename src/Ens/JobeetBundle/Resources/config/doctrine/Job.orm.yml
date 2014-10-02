@@ -41,7 +41,9 @@ Ens\JobeetBundle\Entity\Job:
       nullable: true
     is_activated:
       type: boolean
-      default: true
+      nullable: true
+      options:
+          default: true
     email:
       type: string
       length: 255
