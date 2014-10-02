@@ -8,7 +8,7 @@ Ens\JobeetBundle\Entity\User:
   fields:
     username:
       type: string
-      length: 255
+      length: 40
     password:
       type: string
       length: 255

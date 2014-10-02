@@ -24,10 +24,10 @@ Ens\JobeetBundle\Entity\Job:
       nullable: true
     position:
       type: string
-      length: 255
+      length: 100
     location:
       type: string
-      length: 255
+      length: 100
     description:
       type: text
     how_to_apply:
@@ -41,7 +41,7 @@ Ens\JobeetBundle\Entity\Job:
       nullable: true
     is_activated:
       type: boolean
-      nullable: true
+      default: true
     email:
       type: string
       length: 255
