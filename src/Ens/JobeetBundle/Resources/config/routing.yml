@@ -50,7 +50,13 @@ job_get:
 
 job_make:
     pattern: /api/job/create
-    defaults: { _controller: EnsJobeetBundle:Job:make, _format: ~}
+    defaults: { _controller: EnsJobeetBundle:Job:make, _format: ~ }
+    requirements:
+        _method: POST
+
+job_delete:
+    pattern: /api/job/{id}/remove
+    defaults: { _controller: EnsJobeetBundle:Job:deleteId, _format: ~ }
     requirements:
         _method: POST
 

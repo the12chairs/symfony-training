@@ -24,9 +24,11 @@ class JobController extends Controller
 {
 
 
-    /*
+    /**
+     *
      * Create Job via REST interface
-     * Might is there better solution
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
      */
     public function makeAction()
     {
@@ -38,22 +40,44 @@ class JobController extends Controller
         $form->submit($request);
 
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
 
-            $em->persist($entity);
-            $em->flush($entity);
+        $em = $this->getDoctrine()->getManager();
 
-            $job = $form->getData();
+        $em->persist($entity);
+        $em->flush($entity);
 
-            return $job;
-        }
+
 
         return $this->render('EnsJobeetBundle:Job:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView()
         ));
 
+
+    }
+
+
+    /**
+     * Delete by id
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+
+    public function deleteIdAction($id)
+    {
+
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('EnsJobeetBundle:Job')->findOneById($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Job entity.');
+        }
+
+        $em->remove($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('ens_job'));
     }
 
 

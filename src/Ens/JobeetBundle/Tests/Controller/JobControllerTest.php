@@ -171,6 +171,20 @@ class JobControllerTest extends WebTestCase
         $this->assertTrue($job->getExpiresAt()->format('y/m/d') == date('y/m/d', time() + 86400 * 30));
     }
 
+
+    public function testApiResponse()
+    {
+        $client = $this->createJob(array('job[position]' => 'API TEST'), true);
+        $kernel = static::createKernel();
+        $kernel->boot();
+        $em = $kernel->getContainer()->get('doctrine.orm.entity_manager');
+        $job = $em->getRepository('EnsJobeetBundle:Job')->findOneByPosition('API TEST');
+        $crawler = $client->request('GET', '/api/job/' . $job->getId());
+
+        $this->assertTrue($client->getResponse()->getStatusCode()  == 500);
+    }
+
+
     public function getMostRecentProgrammingJob()
     {
         $kernel = static::createKernel();
@@ -223,6 +237,10 @@ class JobControllerTest extends WebTestCase
 
         return $client;
     }
+
+
+
+
 
     public function getJobByPosition($position)
     {
