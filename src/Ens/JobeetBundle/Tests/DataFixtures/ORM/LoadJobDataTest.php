@@ -64,7 +64,7 @@ class LoadJobData extends AbstractFixture implements OrderedFixtureInterface
 
         $em->flush();
 
-        for($i = 100; $i <= 130; $i++) {
+        for($i = 10; $i <= 130; $i++) {
             $job = new Job();
             $job->setCategory($em->merge($this->getReference('category-programming')));
             $job->setType('full-time');

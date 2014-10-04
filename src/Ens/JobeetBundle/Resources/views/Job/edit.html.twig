@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ asset('bundles/ensjobeet/css/job.css') }}" type="text/css" media="all" />
 {% endblock %}
 {% block content %}
-    <h1>Job edit</h1>
+    <h1>{% trans %}Job edit{% endtrans %}</h1>
     <form action="{{ path('ens_job_update', { 'token': entity.token }) }}" method="post" {{ form_enctype(edit_form) }}>
         {% include 'EnsJobeetBundle:Job:_params.html.twig' with {'edit_form': form} %}
     </form>

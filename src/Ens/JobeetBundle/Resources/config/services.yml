@@ -18,3 +18,8 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: jobeet, label: Users }
         arguments: [null, Ens\JobeetBundle\Entity\User, EnsJobeetBundle:UserAdmin]
+    ens_locale.locale_listener:
+        class: Ens\LocaleBundle\EventListener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }

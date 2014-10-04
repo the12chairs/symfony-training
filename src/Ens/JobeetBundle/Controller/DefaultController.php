@@ -4,6 +4,7 @@ namespace Ens\JobeetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -32,9 +33,12 @@ class DefaultController extends Controller
         ));
     }
 
-    public function changeLanguageAction()
+    public function changeLanguageAction(Request $request)
     {
         $language = $this->getRequest()->get('language');
-        return $this->redirect($this->generateUrl('EnsJobeetBundle_homepage', array('_locale' => $language)));
+        $request->setLocale($language);
+        return $this->redirect($this->generateUrl('EnsJobeetBundle_homepage', array(
+            '_locale' => $language
+        )));
     }
 }

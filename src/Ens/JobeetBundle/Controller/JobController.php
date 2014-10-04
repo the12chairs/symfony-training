@@ -24,6 +24,39 @@ class JobController extends Controller
 {
 
 
+
+    public function updAction($id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('EnsJobeetBundle:Job')->findOneById($id);
+
+
+        $form = $this->createForm(new JobType(), $entity);
+        $content = $this->get("request")->getContent();
+
+        $request = json_decode($content, true);
+        $form->submit($request);
+
+
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($entity);
+        $em->flush($entity);
+
+
+        return $this->redirect($this->generateUrl('ens_job_preview', array(
+            'company' => $entity->getCompanySlug(),
+            'location' => $entity->getLocationSlug(),
+            'token' => $entity->getToken(),
+            'position' => $entity->getPositionSlug()
+        )));
+
+    }
+
+
     /**
      *
      * Create Job via REST interface

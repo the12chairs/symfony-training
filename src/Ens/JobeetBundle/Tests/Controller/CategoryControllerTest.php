@@ -14,16 +14,17 @@ class CategoryControllerTest extends WebTestCase
         $client = static::createClient();
 
         // categories on homepage are clickable
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/ru/po');
 
         $link = $crawler->selectLink('Programming')->link();
+
         $client->click($link);
         $this->assertEquals('Ens\JobeetBundle\Controller\CategoryController::showAction', $client->getRequest()->attributes->get('_controller'));
         $this->assertEquals('programming', $client->getRequest()->attributes->get('slug'));
 
         // categories with more than $maxJobsOnHomepage jobs also have a "more" link
         $crawler = $client->request('GET', '/');
-        $link = $crawler->selectLink('22')->link();
+        $link = $crawler->selectLink('21')->link();
         $crawler = $client->click($link);
         $this->assertEquals('Ens\JobeetBundle\Controller\CategoryController::showAction', $client->getRequest()->attributes->get('_controller'));
         $this->assertEquals('programming', $client->getRequest()->attributes->get('slug'));

@@ -54,11 +54,20 @@ job_make:
     requirements:
         _method: POST
 
+job_upd:
+    pattern: /api/job/{id}/update
+    defaults: { _controller: EnsJobeetBundle:Job:upd, _format: ~ }
+    requirements:
+        _method: POST
+
+
 job_delete:
     pattern: /api/job/{id}/remove
     defaults: { _controller: EnsJobeetBundle:Job:deleteId, _format: ~ }
     requirements:
         _method: POST
+
+
 
 # No FOS/REST
 EnsJobeetBundle_api:

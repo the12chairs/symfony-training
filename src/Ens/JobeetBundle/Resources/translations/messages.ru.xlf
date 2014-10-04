@@ -142,6 +142,14 @@
                 <source>How to apply?</source>
                 <target>Как откликнуться?</target>
             </trans-unit>
+            <trans-unit id="36">
+                <source>Full feed</source>
+                <target>Весь фид</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>Affiliates</source>
+                <target>Партнеры</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
