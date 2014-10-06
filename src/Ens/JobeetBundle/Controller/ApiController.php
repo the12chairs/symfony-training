@@ -174,7 +174,7 @@ abstract class ApiController extends Controller {
 
     /**
      * Updates an entity with data from a JSON string.
-     * Returns the entity, or FALSE in case of error.
+     * Returns tphe entity, or FALSE in case of error.
      *
      * @param Object $entity
      * @param string $json

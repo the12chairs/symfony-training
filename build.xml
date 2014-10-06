@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Jobeet" default="build">
+
+    <target name="createDb">
+        <exec command="php app/console doctrine:database:create" />
+    </target>
+
+    <target name="updateSchema">
+        <exec command="php app/console doctrine:schema:update --force" />
+    </target>
+
+    <target name="upMigrations">
+        <exec command="php app/console doctrine:migrations:migrate" />
+    </target>
+
+
+    <target name="setFuxtures">
+        <exec command="php app/console doctrine:fixtures:load" />
+    </target>
+
+    <target name="setTestFixtures">
+        <exec command="php app/console doctrine:fixtures:load --fixtures=src/Ens/JobeetBundle/Tests/DataFixtures/ORM/ --env=test" />
+    </target>
+
+
+    <target name="createAssets">
+        <exec command="php app/console assets:install web --symlink" />
+    </target>
+
+    <target name="createAdmin">
+        <exec command="php app/console ens:jobeet:users admin admin" />
+    </target>
+
+    <target name="runTests">
+        <exec executable="phpunit" passthru="true" checkreturn="true">
+            <arg value="-c" />
+            <arg value="app" />
+        </exec>
+    </target>
+
+
+
+    <target name ="clearCache">
+        <exec command="php app/console cache:clear --env=prod" />
+        <exec command="php app/console cache:clear --env=dev" />
+    </target>
+
+    <target name="build" depends="createDb, updateSchema, upMigrations, setFuxtures, createAdmin, createAssets, runTests, clearCache">
+    </target>
+
+</project>
