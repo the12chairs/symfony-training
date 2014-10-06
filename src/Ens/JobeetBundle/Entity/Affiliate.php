@@ -112,9 +112,10 @@ class Affiliate
     public function setToken($token)
     {
         $this->token = $token;
-    
+
         return $this;
     }
+
 
     /**
      * Get token

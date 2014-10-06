@@ -7,6 +7,7 @@ class JobControllerTest extends WebTestCase
 
     public function testIndex()
     {
+
         /*
         // get the custom parameters from app config.yml
         $kernel = static::createKernel();
@@ -15,7 +16,7 @@ class JobControllerTest extends WebTestCase
 
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/en');
         $this->assertEquals('Ens\JobeetBundle\Controller\JobController::indexAction', $client->getRequest()->attributes->get('_controller'));
 
         // expired jobs are not listed
@@ -123,12 +124,12 @@ class JobControllerTest extends WebTestCase
 
     public function testEditJob()
     {
-        /*
+
         $client = $this->createJob(array('job[position]' => 'FOO3'), true);
         $crawler = $client->getCrawler();
-        $crawler = $client->request('GET', sprintf('/ru/job/%s/edit', $this->getJobByPosition('FOO3')->getToken()));
+        $crawler = $client->request('GET', sprintf('/job/%s/edit', $this->getJobByPosition('FOO3')->getToken()));
         $this->assertTrue(404 === $client->getResponse()->getStatusCode());
-        */
+
     }
 
     public function testDeleteJob()
@@ -188,12 +189,6 @@ class JobControllerTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->getStatusCode()  != 500);
     }
-
-
-
-
-
-
 
 
     public function getMostRecentProgrammingJob()

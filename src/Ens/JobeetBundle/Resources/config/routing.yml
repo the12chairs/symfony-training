@@ -6,10 +6,11 @@ EnsJobeetBundle_job:
 
  
 EnsJobeetBundle_homepage:
-    pattern:  /
+    pattern:  /{_locale}/
     defaults: { _controller: EnsJobeetBundle:Job:index }
     requirements:
-        _locale: ru|en
+      _locale: ru|en
+
 
 EnsJobeetBundle_category:
     pattern: /{_locale}/category/{slug}/{page}

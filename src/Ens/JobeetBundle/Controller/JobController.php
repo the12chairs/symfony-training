@@ -98,6 +98,10 @@ class JobController extends ApiController
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $request = $this->getRequest();
+        if($request->get('_route') == 'EnsJobeetBundle_nonlocalized') {
+            return $this->redirect($this->generateUrl('ens_jobeet_homepage'));
+        }
 
         $categories = $em->getRepository('EnsJobeetBundle:Category')->getWithJobs();
 
