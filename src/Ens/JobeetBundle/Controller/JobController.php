@@ -9,147 +9,87 @@ use Ens\JobeetBundle\Entity\Job;
 use Ens\JobeetBundle\Form\JobType;
 use Doctrine\ORM\Mapping;
 
-use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
 
-/*
- * FOS/REST solution
- */
+
+
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\NoResultException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
 
 /**
  * Job controller.
  *
  */
-class JobController extends Controller
+class JobController extends ApiController
 {
 
 
-
-    public function updAction($id)
-    {
-
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('EnsJobeetBundle:Job')->findOneById($id);
-
-
-        $form = $this->createForm(new JobType(), $entity);
-        $content = $this->get("request")->getContent();
-
-        $request = json_decode($content, true);
-        $form->submit($request);
-
-
-
-        $em = $this->getDoctrine()->getManager();
-
-        $em->persist($entity);
-        $em->flush($entity);
-
-
-        return $this->redirect($this->generateUrl('ens_job_preview', array(
-            'company' => $entity->getCompanySlug(),
-            'location' => $entity->getLocationSlug(),
-            'token' => $entity->getToken(),
-            'position' => $entity->getPositionSlug()
-        )));
-
-    }
-
-
     /**
-     *
-     * Create Job via REST interface
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
+     * REST API
      */
-    public function makeAction()
-    {
-
-        $entity  = new Job();
-        $form = $this->createForm(new JobType(), $entity);
-        $content = $this->get("request")->getContent();
-        $request = json_decode($content, true);
-        $form->submit($request);
-
-
-
-        $em = $this->getDoctrine()->getManager();
-
-        $em->persist($entity);
-        $em->flush($entity);
-
-
-
-        return $this->render('EnsJobeetBundle:Job:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        ));
-
-
-    }
-
 
     /**
-     * Delete by id
+     * @Method({"GET"})
+     */
+    public function listAction()
+    {
+        return parent::listAction();
+    }
+
+    /**
+     * @Method({"GET"})
+     */
+    public function readAction($id)
+    {
+        return parent::readAction($id);
+    }
+
+    /**
+     * @Method({"POST"})
+     */
+    public function createApiAction()
+    {
+        return parent::createApiAction();
+    }
+
+    /**
+     * @Method({"POST"})
+     */
+    public function updateApiAction($id)
+    {
+        return parent::updateApiAction($id);
+    }
+
+    /**
      * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @Method({"POST"})
+     * @return JsonResponse|\Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-
-    public function deleteIdAction($id)
+    public function deleteApiAction($id)
     {
-
-
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('EnsJobeetBundle:Job')->findOneById($id);
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Job entity.');
-        }
-
-        $em->remove($entity);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('ens_job'));
-    }
-
-
-    /**
-     * @Rest\View
-     */
-    public function allAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $rep = $em->getRepository('EnsJobeetBundle:Job');
-        $jobs = $rep->getActiveJobs();
-
-        $view = View::create();
-        $view->setData($jobs);
-
-
-        return $view;
-
+        return parent::deleteApiAction($id);
     }
 
     /**
-     * @Rest\View
+     * @see BaseApiController::getRepository()
+     * @return JobRepository
      */
-    public function oneAction($id)
+    public function getRepository()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $rep = $em->getRepository('EnsJobeetBundle:Job');
-        $jobs = $rep->getActiveJob($id);
-
-        $view = View::create();
-        $view->setData($jobs);
-
-
-        return $view;
-
+        return $this->getDoctrine()->getManager()->getRepository('EnsJobeetBundle:Job');
     }
 
+    /**
+     * @see BaseApiController::getNewEntity()
+     * @return Object
+     */
+    public function getNewEntity()
+    {
+        return new Job();
+    }
 
     /**
      * Lists all Job entities.

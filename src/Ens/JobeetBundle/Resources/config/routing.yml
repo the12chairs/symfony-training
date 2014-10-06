@@ -34,50 +34,38 @@ EnsJobeetBundle_changeLanguage:
     defaults: { _controller: "EnsJobeetBundle:Default:changeLanguage" }
 
 
-# FOS/REST
+# REST API routes
 job_all:
     pattern:  /api/job
-    defaults: { _controller: EnsJobeetBundle:Job:all, _format: ~ }
+    defaults: { _controller: EnsJobeetBundle:Job:list, _format: ~ }
     requirements:
         _method: GET
 
-job_get:
+job_read:
     pattern:  /api/job/{id}
-    defaults: { _controller: EnsJobeetBundle:Job:one, _format: ~ }
+    defaults: { _controller: EnsJobeetBundle:Job:read, _format: ~ }
     requirements:
         _method: GET
         id: "\d+"
 
-job_make:
+job_create:
     pattern: /api/job/create
-    defaults: { _controller: EnsJobeetBundle:Job:make, _format: ~ }
+    defaults: { _controller: EnsJobeetBundle:Job:createApi, _format: ~ }
     requirements:
         _method: POST
 
-job_upd:
+job_update:
     pattern: /api/job/{id}/update
-    defaults: { _controller: EnsJobeetBundle:Job:upd, _format: ~ }
+    defaults: { _controller: EnsJobeetBundle:Job:updateApi, _format: ~ }
     requirements:
         _method: POST
 
 
 job_delete:
-    pattern: /api/job/{id}/remove
-    defaults: { _controller: EnsJobeetBundle:Job:deleteId, _format: ~ }
+    pattern: /api/job/{id}/delete
+    defaults: { _controller: EnsJobeetBundle:Job:deleteApi, _format: ~ }
     requirements:
         _method: POST
 
 
 
-# No FOS/REST
-EnsJobeetBundle_api:
-    pattern: /api/{token}/jobs.{_format}
-    defaults: {_controller: "EnsJobeetBundle:Api:list"}
-    requirements:
-        format: json|yaml
-
-EnsJobeetBundle_api_show:
-    pattern: /api/{token}/{id}/show.{_format}
-    defaults: {_controller: "EnsJobeetBundle:Api:show"}
-    requirements:
-        format: json|yaml
